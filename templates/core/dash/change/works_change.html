@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block core %}
+    <div class="col-lg-6 p-0 site-content__inner-right">
+        <div class="site-content__page">
+            <div class="site-content__page-wrap mCustomScrollbar _mCS_3">
+                <div id="mCSB_3" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" tabindex="0"
+                     style="max-height: none;">
+                    <div id="mCSB_3_container" class="mCSB_container mt-5"
+                         style="position: relative; top: 0px; left: 0px;">
+                        <div class="niko-sc niko-sc--portfolio">
+                            <div class="row niko-sc__portfolio-list grid" style="position: relative;">
+                                {% for foo in work %}
+                                        <div class="col-lg-6 col-sm-12 niko-sc__portfolio-item-wrap grid-item" >
+                                            <div class="niko-sc__portfolio-item">
+                                                <div class="niko-sc__portfolio-img">
+                                                    <img src="{{ foo.image.url }}" alt="Artush Ghazaryan Works">
+                                                </div>
+                                                <div class="niko-sc__portfolio-info">
+                                                    <a class="niko-sc__portfolio-title" href="{{ foo.work_url }}">{{ foo.title }}</a>
+                                                    <div class="niko-sc__portfolio-category-list">
+                                                        <span class="niko-sc__portfolio-category-item">{{ foo.category }}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% if not request.user.is_superuser and foo.user == request.user or request.user.is_superuser %}
+                                                <a class="btn btn-danger ml-4" href="#" data-toggle="modal"
+                                               data-target="#exampleModal-works-{{ foo.id }}">Delete</a>
+                                                <a class="btn btn-dark float-right ml-1"
+                                                   href="{% url 'core:work_edit' foo.id %}">Edit</a>
+                                            {% endif %}
+                                        </div>
+
+                                    <div class="modal fade" id="exampleModal-works-{{ foo.id }}" tabindex="-1" role="dialog"
+                                         style="position: absolute; z-index: 100"
+                                         aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h6 id="exampleModalLabel">Are you sure you want to delete?</h6>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <a href="{% url 'core:work_delete' foo.id %}">
+                                                        <button type="button" class="btn btn-primary">Delete</button>
+                                                    </a>
+                                                    <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">
+                                                        Close
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <div class="row mt-5 mb-5 niko-sc__portfolio-list grid" style="position: relative;">
+                                <div class="col-1"></div>
+                                <div class="col-10">
+                                    <div class="row">
+                                        <div class="col-12 mt-5">
+                                            <h6>{% if not c_form %}Edit{% else %}Create{% endif %} work</h6>
+                                            <form action="." method="post"  enctype="multipart/form-data">
+                                                {% csrf_token %}
+                                                {{ w_form.as_p }}
+                                                <input class="btn btn-success" type="submit" name="w_click" value="Save">
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

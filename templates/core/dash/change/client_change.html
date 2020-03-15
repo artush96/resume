@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block core %}
+    <div class="col-lg-6 p-0 site-content__inner-right">
+        <div class="site-content__page">
+            <div class="site-content__page-wrap mCustomScrollbar _mCS_3">
+                <div id="mCSB_3" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" tabindex="0"
+                     style="max-height: none;">
+                    <div id="mCSB_3_container" class="mCSB_container" style="position: relative; top: 0px; left: 0px;"
+                         dir="ltr">
+                        <form class="mt-5" action="." method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="col-10 mb-5 mt-5">
+                                {{ c_form.client_logo }}
+                            </div>
+                            <div class="col-10 mb-5">
+                                {{ c_form.client_url }}
+                            </div>
+                            <input class="mb-5 btn btn-success" type="submit" value='Save'>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,243 @@
+{% extends 'base.html' %}
+
+{% block core %}
+    <div class="col-lg-6 p-0 site-content__inner-right">
+        <div class="site-content__page">
+            <div class="site-content__page-wrap mCustomScrollbar _mCS_3">
+                <div id="mCSB_3" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" tabindex="0"
+                     style="max-height: none;">
+                    <div id="mCSB_3_container" class="mCSB_container mt-5"
+                         style="position: relative; top: 0px; left: 0px;"
+                         dir="ltr">
+
+                        <div class="niko-sc niko-sc--about">
+                            {% if experience %}
+                                <div class="niko-sc__about-list">
+                                    <div class="niko-sc__about-item">
+                                        {{ experience.option_1 }}
+                                    </div>
+                                    <div class="niko-sc__about-item">
+                                        {{ experience.option_2 }}
+                                    </div>
+                                    <div class="niko-sc__about-item">
+                                        {{ experience.option_3 }}
+                                    </div>
+                                </div>
+                                <div class="niko-sc__about-description">
+                                    {{ experience.body }}
+                                </div>
+                                {% if not request.user.is_superuser and experience.user == request.user or request.user.is_superuser %}
+                                    <a class="btn btn-danger mt-1" href="#" data-toggle="modal"
+                                       data-target="#exampleModal-exp-{{ experience.id }}">Delete</a>
+                                    <a class="btn btn-dark float-right mt-1 ml-1"
+                                       href="{% url 'core:exp_edit' experience.id %}">Edit</a>
+                                {% endif %}
+                                <a class="btn btn-info float-right mt-1"
+                                   href="{% url 'core:exp_create' %}">Create</a>
+                                <div class="modal fade" id="exampleModal-exp-{{ experience.id }}"
+                                     tabindex="-1"
+                                     role="dialog"
+                                     style="position: absolute; z-index: 100"
+                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h6 id="exampleModalLabel">Are you sure you want to
+                                                    delete?</h6>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <a href="{% url 'core:exp_delete' experience.id %}">
+                                                    <button type="button" class="btn btn-primary">Delete
+                                                    </button>
+                                                </a>
+                                                <button type="button" class="btn btn-secondary"
+                                                        data-dismiss="modal">
+                                                    Close
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="niko-sc niko-sc--skills">
+                            <div class="niko-sc__title-wrap">
+                                <i class="niko-sc__title-icon icon-speedometer"></i>
+                                <h3 class="niko-sc__title">Skills</h3>
+                                <a class="btn btn-info ml-4"
+                                       href="{% url 'core:skill_create' %}">Create</a>
+                            </div>
+
+                            <div class="niko-sc__skills-list">
+                                {% for foo in skills %}
+                                    <div class="niko-sc__skills-item active">
+                                        <span class="niko-sc__skills-name">{{ foo.skills }}</span>
+                                        <div class="niko-sc__skills-value">
+                                            <span class="counter">{{ foo.skill_level }}</span>%
+                                        </div>
+                                        <div class="niko-sc__skills-line">
+                                            <div class="active-line"
+                                                 style="width: {{ foo.skill_level }}%; opacity: 1;"></div>
+                                        </div>
+                                    </div>
+                                    {% if not request.user.is_superuser and foo.user == request.user or request.user.is_superuser %}
+                                        <a class="btn btn-danger mb-5" href="#" data-toggle="modal"
+                                           data-target="#exampleModal-skill-{{ foo.id }}">Delete</a>
+                                        <a class="btn btn-dark float-right mb-5 ml-1"
+                                           href="{% url 'core:skill_edit' foo.id %}">Edit</a>
+                                    {% endif %}
+                                    <div class="modal fade" id="exampleModal-skill-{{ foo.id }}"
+                                         tabindex="-1"
+                                         role="dialog"
+                                         style="position: absolute; z-index: 100"
+                                         aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h6 id="exampleModalLabel">Are you sure you want to
+                                                        delete?</h6>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <a href="{% url 'core:skill_delete' foo.id %}">
+                                                        <button type="button" class="btn btn-primary">Delete
+                                                        </button>
+                                                    </a>
+                                                    <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">
+                                                        Close
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <div class="niko-sc niko-sc--experience">
+                            <div class="niko-sc__exp-educ-list">
+                                <div class="niko-sc__educ">
+                                    <div class="niko-sc__experience-title-wrap niko-sc__title-wrap">
+                                        <i class="niko-sc__experience-title-icon niko-sc__title-icon icon-graduation"></i>
+                                        <h3 class="niko-sc__experience-title niko-sc__title">education</h3>
+
+                                    </div>
+                                <a class="btn btn-info mb-5" href="{% url 'core:edu_create' %}">Create</a>
+                                    <div class="niko-sc__experience-list">
+                                        {% for foo in education %}
+                                            <div class="niko-sc__experience-item">
+                                                <div class="niko-sc__experience-period">
+                                                    <span>{{ foo.year }}</span>
+                                                </div>
+                                                <h5 class="niko-sc__experience-name">{{ foo.schooll }}</h5>
+                                                <div class="niko-sc__experience-region">{{ foo.location }}</div>
+                                                <div class="niko-sc__experience-description">{{ foo.body }}</div>
+                                            </div>
+                                            {% if not request.user.is_superuser and foo.user == request.user or request.user.is_superuser %}
+                                                <a class="btn btn-danger mb-5" href="#" data-toggle="modal"
+                                                   data-target="#exampleModal-edu-{{ foo.id }}">Delete</a>
+                                                <a class="btn btn-dark float-right mb-5 ml-1"
+                                                   href="{% url 'core:edu_edit' foo.id %}">Edit</a>
+                                            {% endif %}
+                                            <div class="modal fade" id="exampleModal-edu-{{ foo.id }}"
+                                                 tabindex="-1"
+                                                 role="dialog"
+                                                 style="position: absolute; z-index: 100"
+                                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h6 id="exampleModalLabel">Are you sure you want to
+                                                                delete?</h6>
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                    aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <a href="{% url 'core:edu_delete' foo.id %}">
+                                                                <button type="button" class="btn btn-primary">Delete
+                                                                </button>
+                                                            </a>
+                                                            <button type="button" class="btn btn-secondary"
+                                                                    data-dismiss="modal">
+                                                                Close
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <div class="niko-sc__exp">
+                                    <div class="niko-sc__experience-title-wrap niko-sc__title-wrap">
+                                        <i class="niko-sc__experience-title-icon niko-sc__title-icon icon-briefcase"></i>
+                                        <h3 class="niko-sc__experience-title niko-sc__title">exprerience</h3>
+                                    </div>
+                                <a class="btn btn-info mb-5"
+                                               href="{% url 'core:wexp_create' %}">Create</a>
+                                    <div class="niko-sc__experience-list">
+                                        {% for foo in workexperience %}
+                                            <div class="niko-sc__experience-item">
+                                                <div class="niko-sc__experience-period">
+                                                    <span>{{ foo.year }}</span>
+                                                </div>
+                                                <h5 class="niko-sc__experience-name">{{ foo.specialty }}</h5>
+                                                <div class="niko-sc__experience-region">{{ foo.location }}</div>
+                                                <div class="niko-sc__experience-description">{{ foo.body }}</div>
+                                            </div>
+                                            {% if not request.user.is_superuser and foo.user == request.user or request.user.is_superuser %}
+                                                <a class="btn btn-danger mb-5" href="#" data-toggle="modal"
+                                                   data-target="#exampleModal-w-exp-{{ foo.id }}">Delete</a>
+                                                <a class="btn btn-dark float-right mb-5 ml-1"
+                                                   href="{% url 'core:wexp_edit' foo.id %}">Edit</a>
+                                            {% endif %}
+                                            <div class="modal fade" id="exampleModal-w-exp-{{ foo.id }}"
+                                                 tabindex="-1"
+                                                 role="dialog"
+                                                 style="position: absolute; z-index: 100"
+                                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h6 id="exampleModalLabel">Are you sure you want to
+                                                                delete?</h6>
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                    aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <a href="{% url 'core:wexp_delete' foo.id %}">
+                                                                <button type="button" class="btn btn-primary">Delete
+                                                                </button>
+                                                            </a>
+                                                            <button type="button" class="btn btn-secondary"
+                                                                    data-dismiss="modal">
+                                                                Close
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,383 @@
+{% extends 'base.html' %}
+
+{% block core %}
+    <div class="col-lg-6 p-0 site-content__inner-right">
+        <div class="site-content__page">
+            <div class="site-content__page-wrap mCustomScrollbar _mCS_3">
+                <div id="mCSB_3" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" tabindex="0"
+                     style="max-height: none;">
+                    <div id="mCSB_3_container" class="mCSB_container" style="position: relative; top: 0px; left: 0px;"
+                         dir="ltr">
+
+
+                        <header class="entry-header">
+                            <h1 class="entry-title">about me</h1>
+                        </header>
+
+                        <div class="niko-sc niko-sc--about">
+                            {% if about %}
+                                <div class="niko-sc__about-list">
+                                    <div class="niko-sc__about-item">
+                                        {{ about.age }}
+                                    </div>
+                                    <div class="niko-sc__about-item">
+                                        {{ about.location }}
+                                    </div>
+                                    <div class="niko-sc__about-item">
+                                        {{ about.specialty }}
+                                    </div>
+                                </div>
+                                <div class="niko-sc__about-description">
+                                    {{ about.body }}
+                                </div>
+                                {% if not request.user.is_superuser and about.user == request.user or request.user.is_superuser %}
+                                    <a class="btn btn-danger" href="#" data-toggle="modal"
+                                       data-target="#exampleModal-{{ about.id }}">Delete</a>
+                                    <a class="btn btn-dark float-right ml-1" href="{% url 'core:about_me_edit' about.id %}">Edit</a>
+                                {% endif %}
+                                <div class="modal fade" id="exampleModal-{{ about.id }}" tabindex="-1"
+                                     role="dialog"
+                                     style="position: absolute; z-index: 100"
+                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h6 id="exampleModalLabel">Are you sure you want to
+                                                    delete?</h6>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <a href="{% url 'core:about_me_delete' about.id %}">
+                                                    <button type="button" class="btn btn-primary">Delete
+                                                    </button>
+                                                </a>
+                                                <button type="button" class="btn btn-secondary"
+                                                        data-dismiss="modal">
+                                                    Close
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        <a class="btn btn-info float-right" href="{% url 'core:about_me_create' %}">Create</a>
+                        </div>
+
+                        <div class="niko-sc niko-sc--services">
+                            <div class="niko-sc__title-wrap">
+                                <h3 class="niko-sc__title">my services</h3>
+                                <a class="btn btn-info float-left ml-5"
+                               href="{% url 'core:my_services_create' %}">Create</a>
+                            </div>
+                            <div class="niko-sc__services-list">
+                            {% if services %}
+                                    <div class="niko-sc__services-item">
+                                        <i class="niko-sc__services-icon icon-screen-desktop"></i>
+                                        <h5 class="niko-sc__services-name">{{ services.title_1 }}</h5>
+                                        <div class="niko-sc__services_description">
+                                            {{ services.body_1 }}
+                                        </div>
+                                    </div>
+                                    <div class="niko-sc__services-item">
+                                        <i class="niko-sc__services-icon icon-rocket"></i>
+                                        <h5 class="niko-sc__services-name">{{ services.title_2 }}</h5>
+                                        <div class="niko-sc__services_description">
+                                            {{ services.body_2 }}
+                                        </div>
+                                    </div>
+                                    <div class="niko-sc__services-item">
+                                        <i class="niko-sc__services-icon icon-layers"></i>
+                                        <h5 class="niko-sc__services-name">{{ services.title_3 }}</h5>
+                                        <div class="niko-sc__services_description">
+                                            {{ services.body_3 }}
+                                        </div>
+                                    </div>
+                                    <div class="niko-sc__services-item">
+                                        <i class="niko-sc__services-icon icon-shield"></i>
+                                        <h5 class="niko-sc__services-name">{{ services.title_4 }}</h5>
+                                        <div class="niko-sc__services_description">
+                                            {{ services.body_4 }}
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                {% if not request.user.is_superuser and services.user == request.user or request.user.is_superuser %}
+                                    <a class="btn btn-danger ml-4" href="#" data-toggle="modal"
+                                       data-target="#exampleModal-services-{{ services.id }}">Delete</a>
+                                    <a class="btn btn-dark float-right ml-1"
+                                       href="{% url 'core:my_services_edit' services.id %}">Edit</a>
+                                {% endif %}
+                                <div class="modal fade" id="exampleModal-services-{{ services.id }}" tabindex="-1"
+                                     role="dialog"
+                                     style="position: absolute; z-index: 100"
+                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h6 id="exampleModalLabel">Are you sure you want to
+                                                    delete?</h6>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <a href="{% url 'core:my_services_delete' services.id %}">
+                                                    <button type="button" class="btn btn-primary">Delete
+                                                    </button>
+                                                </a>
+                                                <button type="button" class="btn btn-secondary"
+                                                        data-dismiss="modal">
+                                                    Close
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </div>
+
+
+                        <div class="niko-sc niko-sc--pricing">
+                            <div class="niko-sc__title-wrap">
+                                <h3 class="niko-sc__title">my pricing</h3>
+                                <a class="btn btn-info float-right ml-5"
+                               href="{% url 'core:pricing_create' %}">Create</a>
+                            </div>
+                            {% if pricing %}
+                            <div class="niko-sc__pricing-list">
+                                    <div class="niko-sc__pricing-item">
+                                        <h5 class="niko-sc__pricing-name">{{ pricing.title_l }}</h5>
+                                        <div class="niko-sc__pricing-price">
+                                    <span class="niko-sc__pricing-price-wrap">
+                                        <span class="niko-sc__pricing-currency">$</span>
+                                        <span class="niko-sc__pricing-cost">{{ pricing.price_l }}</span>
+                                    </span>
+                                        </div>
+                                        <ul class="niko-sc__pricing-description-list">
+                                            <li class="" style="color: #8e44ad">
+                                                {{ pricing.option_l_1 }}
+                                            </li>
+                                            <li class="" style="color: #0757fe">
+                                                {{ pricing.option_l_2 }}
+                                            </li>
+                                            <li class="" style="color: #f45800">
+                                                {{ pricing.option_l_3 }}
+                                            </li>
+                                            <li class="" style="color: #398f14">
+                                                {{ pricing.option_l_4 }}
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="niko-sc__pricing-item">
+                                        <h5 class="niko-sc__pricing-name">{{ pricing.title_c }}</h5>
+                                        <div class="niko-sc__pricing-price">
+                                    <span class="niko-sc__pricing-price-wrap">
+                                        <span class="niko-sc__pricing-currency">$</span>
+                                        <span class="niko-sc__pricing-cost">{{ pricing.price_c }}</span>
+                                    </span>
+                                        </div>
+                                        <ul class="niko-sc__pricing-description-list">
+                                            <li class="" style="color: #0757fe">
+                                                {{ pricing.option_c_1 }}
+                                            </li>
+                                            <li class="" style="color: #8e44ad">
+                                                {{ pricing.option_c_2 }}
+                                            </li>
+                                            <li class="" style="color: #398f14">
+                                                {{ pricing.option_c_3 }}
+                                            </li>
+                                            <li class="" style="color: #f45800">
+                                                {{ pricing.option_c_4 }}
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="niko-sc__pricing-item">
+                                        <h5 class="niko-sc__pricing-name">{{ pricing.title_r }}</h5>
+                                        <div class="niko-sc__pricing-price">
+                                    <span class="niko-sc__pricing-price-wrap">
+                                        <span class="niko-sc__pricing-currency">$</span>
+                                        <span class="niko-sc__pricing-cost">{{ pricing.price_r }}</span>
+                                    </span>
+                                        </div>
+                                        <ul class="niko-sc__pricing-description-list">
+                                            <li class="" style="color: #f45800">
+                                                {{ pricing.option_r_1 }}
+                                            </li>
+                                            <li class="" style="color: #398f14">
+                                                {{ pricing.option_r_2 }}
+                                            </li>
+                                            <li class="" style="color: #8e44ad">
+                                                {{ pricing.option_r_3 }}
+                                            </li>
+                                            <li class="" style="color: #0757fe">
+                                                {{ pricing.option_r_4 }}
+                                            </li>
+                                        </ul>
+                                    </div>
+
+
+                                </div>
+                                {% if not request.user.is_superuser and pricing.user == request.user or request.user.is_superuser %}
+                                    <a class="btn btn-danger ml-4" href="#" data-toggle="modal"
+                                       data-target="#exampleModal-pricing-{{ pricing.id }}">Delete</a>
+                                    <a class="btn btn-dark float-right ml-1"
+                                       href="{% url 'core:pricing_edit' pricing.id %}">Edit</a>
+                                {% endif %}
+                                <div class="modal fade" id="exampleModal-pricing-{{ pricing.id }}" tabindex="-1"
+                                     role="dialog"
+                                     style="position: absolute; z-index: 100"
+                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h6 id="exampleModalLabel">Are you sure you want to
+                                                    delete?</h6>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <a href="{% url 'core:pricing_delete' pricing.id %}">
+                                                    <button type="button" class="btn btn-primary">Delete
+                                                    </button>
+                                                </a>
+                                                <button type="button" class="btn btn-secondary"
+                                                        data-dismiss="modal">
+                                                    Close
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </div>
+
+
+                        <div class="niko-sc niko-sc--counter">
+                            <div class="niko-sc__title-wrap">
+                                <h3 class="niko-sc__title">principal facts</h3>
+                                <a class="btn btn-info float-right ml-5"
+                               href="{% url 'core:facts_create' %}">Create</a>
+                            </div>
+                            {% if facts %}
+                                <div class="niko-sc__counter-list">
+
+                                    <div class="niko-sc__counter-item">
+                                        <span class="niko-sc__counter-number">{{ facts.count_1 }}</span>
+                                        <span class="niko-sc__counter-name">{{ facts.fact_1 }}</span>
+                                    </div>
+                                    <div class="niko-sc__counter-item">
+                                        <span class="niko-sc__counter-number">{{ facts.count_2 }}</span>
+                                        <span class="niko-sc__counter-name">{{ facts.fact_2 }}</span>
+                                    </div>
+                                    <div class="niko-sc__counter-item">
+                                        <span class="niko-sc__counter-number">{{ facts.count_3 }}</span>
+                                        <span class="niko-sc__counter-name">{{ facts.fact_3 }}</span>
+                                    </div>
+                                    <div class="niko-sc__counter-item">
+                                        <span class="niko-sc__counter-number">{{ facts.count_4 }}</span>
+                                        <span class="niko-sc__counter-name">{{ facts.fact_4 }}</span>
+                                    </div>
+                                </div>
+                                {% if not request.user.is_superuser and facts.user == request.user or request.user.is_superuser %}
+                                    <a class="btn btn-danger ml-4" href="#" data-toggle="modal"
+                                       data-target="#exampleModal-facts-{{ facts.id }}">Delete</a>
+                                    <a class="btn btn-dark float-right ml-1"
+                                       href="{% url 'core:facts_edit' facts.id %}">Edit</a>
+                                {% endif %}
+                                <div class="modal fade" id="exampleModal-facts-{{ facts.id }}" tabindex="-1"
+                                     role="dialog"
+                                     style="position: absolute; z-index: 100"
+                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h6 id="exampleModalLabel">Are you sure you want to
+                                                    delete?</h6>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <a href="{% url 'core:facts_delete' facts.id %}">
+                                                    <button type="button" class="btn btn-primary">Delete
+                                                    </button>
+                                                </a>
+                                                <button type="button" class="btn btn-secondary"
+                                                        data-dismiss="modal">
+                                                    Close
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </div>
+
+
+                        <div class="niko-sc niko-sc--clients">
+                            <div class="niko-sc__title-wrap">
+                                <h3 class="niko-sc__title">my clients</h3>
+                                <a class="btn btn-info ml-5" href="{% url 'core:client_create' %}">Create</a>
+                            </div>
+
+                            <div class="niko-sc__clients-list">
+
+
+                                {% for foo in clients %}
+                                    <div class="niko-sc__clients-item">
+                                        <a class="niko-sc__clients-image" href="{{ foo.client_url }}" target="_blank" rel="noreferrer">
+                                            <img src="{{ foo.client_logo.url }}" alt="Group 26" class="mCS_img_loaded">
+                                        </a>
+                                        {% if not request.user.is_superuser and foo.user == request.user or request.user.is_superuser %}
+                                            <a class="btn btn-dark mt-1"
+                                               href="{% url 'core:client_edit' foo.id %}">Edit</a>
+                                            <a class="btn btn-danger mt-1" href="#" data-toggle="modal"
+                                               data-target="#exampleModal-client-{{ foo.id }}">Delete</a>
+                                        {% endif %}
+
+
+                                        <div class="modal fade" id="exampleModal-client-{{ foo.id }}" tabindex="-1"
+                                             role="dialog"
+                                             style="position: absolute; z-index: 100"
+                                             aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h6 id="exampleModalLabel">Are you sure you want to
+                                                            delete?</h6>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <a href="{% url 'core:client_delete' foo.id %}">
+                                                            <button type="button" class="btn btn-primary">Delete
+                                                            </button>
+                                                        </a>
+                                                        <button type="button" class="btn btn-secondary"
+                                                                data-dismiss="modal">
+                                                            Close
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

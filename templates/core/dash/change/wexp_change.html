@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block core %}
+    <div class="col-lg-6 p-0 site-content__inner-right">
+        <div class="site-content__page">
+            <div class="site-content__page-wrap mCustomScrollbar _mCS_3">
+                <div id="mCSB_3" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" tabindex="0"
+                     style="max-height: none;">
+                    <div id="mCSB_3_container" class="mCSB_container" style="position: relative; top: 0px; left: 0px;"
+                         dir="ltr">
+                        <div class="niko-sc niko-sc--experience">
+                            <div class="niko-sc__exp-educ-list">
+                                <div class="niko-sc__exp col-10">
+                                    <div class="niko-sc__experience-title-wrap niko-sc__title-wrap">
+                                        <i class="niko-sc__experience-title-icon niko-sc__title-icon icon-briefcase"></i>
+                                        <h3 class="niko-sc__experience-title niko-sc__title">exprerience</h3>
+                                    </div>
+                                    <div class="niko-sc__experience-list ml-5">
+                                        <form class="mb-5" action="." method="post">
+                                            {% csrf_token %}
+                                            <div class="niko-sc__experience-item">
+                                                <div class="niko-sc__experience-period">
+                                                    <span>{{ wex_form.year }}</span>
+                                                </div>
+                                                <h5 class="niko-sc__experience-name">{{ wex_form.specialty }}</h5>
+                                                <div class="niko-sc__experience-name">{{ wex_form.location }}</div>
+                                                <div class="niko-sc__experience-description">{{ wex_form.body }}</div>
+                                            </div>
+                                            <input class="btn btn-success" type="submit" name="wex_click" value="Save">
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

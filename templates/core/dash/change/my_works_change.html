@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+
+{% block core %}
+    <div class="col-lg-6 p-0 site-content__inner-right">
+        <div class="site-content__page">
+            <div class="site-content__page-wrap mCustomScrollbar _mCS_3">
+                <div id="mCSB_3" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" tabindex="0"
+                     style="max-height: none;">
+                    <div id="mCSB_3_container" class="mCSB_container mt-5"
+                         style="position: relative; top: 0px; left: 0px;">
+
+                        <div class="niko-sc niko-sc--portfolio">
+                            <a class="btn btn-info" href="{% url 'core:cat_create' %}">Create Category</a>
+                            <a class="btn btn-info float-right mt-1" href="{% url 'core:work_create' %}">Create Work</a>
+                            <ul class="niko-sc__portfolio-filter d-block">
+                                <li class="{% if not category %}active{% endif %} niko-sc__portfolio-filter-item mt-3">
+                                    <a href="{% url 'core:works_change' %}">all</a>
+                                </li>
+                                {% for foo in categoryis %}
+                                    <div class="align-items-center mt-3">
+                                        <li class="mb-1 {% if category.slug == foo.slug %}active{% endif %} niko-sc__portfolio-filter-item">
+                                            <a href="/myworks/change/{{ foo.slug }}">{{ foo.title }}</a>
+                                        </li>
+                                    </div>
+                                    {% if not request.user.is_superuser and foo.user == request.user or request.user.is_superuser %}
+                                        <div class="col-2 d-inline">
+                                            <a class="btn btn-danger" href="#" data-toggle="modal"
+                                               data-target="#exampleModal-cat-{{ foo.id }}">Delete</a>
+
+                                            <a class="btn btn-dark"
+                                               href="{% url 'core:cat_edit' foo.id %}">Edit</a>
+                                        </div>
+                                    {% endif %}
+                                    <div class="modal fade" id="exampleModal-cat-{{ foo.id }}"
+                                         tabindex="-1"
+                                         role="dialog"
+                                         style="position: absolute; z-index: 100"
+                                         aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h6 id="exampleModalLabel">Are you sure you want to
+                                                        delete?</h6>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <a href="{% url 'core:cat_delete' foo.id %}">
+                                                        <button type="button" class="btn btn-primary">Delete
+                                                        </button>
+                                                    </a>
+                                                    <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">
+                                                        Close
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </ul>
+                            <div class="mt-5 row niko-sc__portfolio-list grid" style="position: relative;">
+                                {% for foo in work %}
+                                    <div class="col-lg-6 col-sm-12 niko-sc__portfolio-item-wrap grid-item">
+                                        <div class="niko-sc__portfolio-item">
+                                            <div class="niko-sc__portfolio-img">
+                                                <img src="{{ foo.image.url }}" alt="Artush Ghazaryan Works">
+                                            </div>
+                                            <div class="niko-sc__portfolio-info">
+                                                <a class="niko-sc__portfolio-title"
+                                                   href="{{ foo.work_url }}" target="_blank" rel="noreferrer">{{ foo.title }}</a>
+                                                <div class="niko-sc__portfolio-category-list">
+                                                    <span class="niko-sc__portfolio-category-item">{{ foo.category }}</span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        {% if not request.user.is_superuser and foo.user == request.user or request.user.is_superuser %}
+                                            <a class="btn btn-danger mt-1" href="#" data-toggle="modal"
+                                               data-target="#exampleModal-works-{{ foo.id }}">Delete</a>
+                                            <a class="btn btn-dark float-right mt-1 ml-1"
+                                               href="{% url 'core:work_edit' foo.id %}">Edit</a>
+                                        {% endif %}
+                                    </div>
+
+                                    <div class="modal fade" id="exampleModal-works-{{ foo.id }}"
+                                         tabindex="-1"
+                                         role="dialog"
+                                         style="position: absolute; z-index: 100"
+                                         aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h6 id="exampleModalLabel">Are you sure you want to
+                                                        delete?</h6>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <a href="{% url 'core:work_delete' foo.id %}">
+                                                        <button type="button" class="btn btn-primary">Delete
+                                                        </button>
+                                                    </a>
+                                                    <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">
+                                                        Close
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

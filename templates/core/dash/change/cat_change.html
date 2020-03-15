@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block core %}
+    <div class="col-lg-6 p-0 site-content__inner-right">
+        <div class="site-content__page">
+            <div class="site-content__page-wrap mCustomScrollbar _mCS_3">
+                <div id="mCSB_3" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" tabindex="0"
+                     style="max-height: none;">
+                    <div id="mCSB_3_container" class="mCSB_container mt-5"
+                         style="position: relative; top: 0px; left: 0px;">
+                        <div class="niko-sc niko-sc--portfolio">
+                            <div class="row mt-5 mb-5 niko-sc__portfolio-list grid" style="position: relative;">
+                                <div class="col-1"></div>
+                                <div class="col-10">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            {% if cat_form %}
+                                                <h6>Create/Edit category</h6>
+                                            <form action="." method="post">
+                                                {% csrf_token %}
+                                                {{ cat_form.as_p }}
+                                                <input class="btn btn-success" type="submit" value="Save">
+                                            </form>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

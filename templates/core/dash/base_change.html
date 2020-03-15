@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block core %}
+    {% if aboutme %}
+        <div class="col-lg-6 p-0 site-content__inner-right">
+            <div class="site-content__page">
+                <div class="site-content__page-wrap mCustomScrollbar _mCS_3">
+                    <div id="mCSB_3" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" tabindex="0"
+                         style="max-height: none;">
+                        <div id="mCSB_3_container" class="mCSB_container mt-5"
+                             style="position: relative; top: 0px; left: 0px;"
+                             dir="ltr">
+
+                            <div class="niko-sc niko-sc--about">
+                                <div class="d-lg-none d-md-none d-sm-block">
+                                    <div class="person__avatar s-back-switch">
+                                        <img class="s-img-switch"
+                                             src="{{ aboutme.img.url }}" alt="Artush Ghazaryan">
+                                    </div>
+
+                                    <div class="person__info">
+
+                                        <h2 class="person__name">{{ aboutme.name }}</h2>
+                                        <div class="person__position">
+                                            <span>{{ aboutme.speciality }}</span>
+                                        </div>
+                                        <div class="person__socials">
+                                            <ul class="person__socials-list">
+                                                <li>
+                                                    <a href="{{ aboutme.fb }}">
+                                                        <img src="{% static 'img/facebook-logo.png' %}"
+                                                             style="width: 25px; height: auto; stroke: red; fill: red"
+                                                             alt="Artush Ghazaryan Facebook">
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{ aboutme.lin }}">
+                                                        <img src="{% static 'img/linkedin.png' %}"
+                                                             style="width: 25px; height: auto; fill: ivory"
+                                                             alt="Artush Ghazaryan LinkedIn">
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{ aboutme.gt }}">
+                                                        <img src="{% static 'img/github-logo.png' %}"
+                                                             style="width: 25px; height: auto; fill: ivory"
+                                                             alt="Artush Ghazaryan GitHub">
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{ aboutme.tm }}">
+                                                        <img src="{% static 'img/telegram.png' %}"
+                                                             style="width: 25px; height: auto; fill: ivory"
+                                                             alt="Artush Ghazaryan Telegram">
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                            <div class="ml-lg-5 ml-md-5 ml-sm-3 mb-3">
+                                                {% if not request.user.is_superuser and aboutme.user == request.user or request.user.is_superuser %}
+                                                    <a class="btn btn-danger" href="#" data-toggle="modal"
+                                                       data-target="#exampleModal-gen-{{ aboutme.id }}">Delete</a>
+                                                    <a class="btn btn-dark"
+                                                   href="{% url 'core:gen_edit' aboutme.id %}">Edit</a>
+                                                {% endif %}
+                                                <a class="btn btn-info" href="{% url 'core:gen_create' %}">Create</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="exampleModal-gen-{{ aboutme.id }}"
+             tabindex="-1"
+             role="dialog"
+             style=""
+             aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h6 id="exampleModalLabel">Are you sure you want
+                            to
+                            delete?</h6>
+                        <button type="button" class="close"
+                                data-dismiss="modal"
+                                aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="{% url 'core:gen_delete' aboutme.id %}">
+                            <button type="button"
+                                    class="btn btn-primary">Delete
+                            </button>
+                        </a>
+                        <button type="button" class="btn btn-secondary"
+                                data-dismiss="modal">
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

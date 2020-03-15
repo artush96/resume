@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block core %}
+    <div class="col-lg-6 p-0 site-content__inner-right">
+        <div class="site-content__page">
+            <div class="site-content__page-wrap mCustomScrollbar _mCS_3">
+                <div id="mCSB_3" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" tabindex="0"
+                     style="max-height: none;">
+                    <div id="mCSB_3_container" class="mCSB_container" style="position: relative; top: 0px; left: 0px;"
+                         dir="ltr">
+                        <form class="mt-5" action="." method="post">
+                            {% csrf_token %}
+                            <div class="niko-sc niko-sc--about">
+                                <div class="niko-sc__about-list">
+                                    <div class="niko-sc__about-item mt-5">
+                                        {{ e_form.option_1 }}
+                                    </div>
+                                    <div class="niko-sc__about-item mt-5">
+                                        {{ e_form.option_2 }}
+                                    </div>
+                                    <div class="niko-sc__about-item mt-5">
+                                        {{ e_form.option_3 }}
+                                    </div>
+                                </div>
+                                <div class="niko-sc__about-description">
+                                    {{ e_form.body }}
+                                </div>
+                            </div>
+                            <input class="btn btn-success" type="submit" value="Save">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

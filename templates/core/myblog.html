@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block core %}
+    <div class="col-lg-6 p-0 site-content__inner-right">
+        <div class="site-content__page">
+            <div class="site-content__page-wrap mCustomScrollbar _mCS_3">
+                <div id="mCSB_3" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" tabindex="0"
+                     style="max-height: none;">
+                    <div id="mCSB_3_container" class="mCSB_container mt-5"
+                         style="position: relative; top: 0px; left: 0px;"
+                         dir="ltr">
+                        <div class="niko-blog">
+                            <div class="niko-blog__list grid " style="position: relative; height: 1094.32px;">
+                                <div class="" style="margin: 0 auto">
+                                    <img src="{% static 'img/amIL.png' %}" style="width: 60%; height: auto; margin-left: 20%" alt="Artush Ghazaryan Blog">
+                                    <div class="mt-5" style="margin: 0 auto">
+                                        <p style="font-size: 30px" class="text-monospace text-center">unfortunately there is no time</p>
+                                    </div>
+                                </div>
+
+
+
+{#                                {% for foo in blog %}#}
+{#                                    <div class="niko-blog__item grid-item">#}
+{#                                        <div class="niko-blog__item-top">#}
+{#                                            <div class="niko-blog__item-img">#}
+{#                                                <img width="460" height="268"#}
+{#                                                     src="{{ foo.image.url }}"#}
+{#                                                     sizes="(max-width: 460px) 100vw, 460px"></div>#}
+{#                                        </div>#}
+{#                                        <div class="niko-blog__item-bottom">#}
+{#                                            <a href="https://w5.themedemo.co/niko/black/2019/04/02/some-media-information-about-me/"#}
+{#                                               class="niko-blog__item-title">{{ foo.title }}</a>#}
+{#                                            <div class="niko-blog__item-date-bottom"><a#}
+{#                                                    href="https://w5.themedemo.co/niko/black/2019/04/02/some-media-information-about-me/">{{ foo.date|date:'M d Y'}}</a></div>#}
+{#                                            <div class="niko-blog__item-excerpt"><p>{{ foo.body }}</p>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                {% endfor %}#}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

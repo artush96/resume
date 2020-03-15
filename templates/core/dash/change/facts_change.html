@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block core %}
+    <div class="col-lg-6 p-0 site-content__inner-right">
+        <div class="site-content__page">
+            <div class="site-content__page-wrap mCustomScrollbar _mCS_3">
+                <div id="mCSB_3" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" tabindex="0"
+                     style="max-height: none;">
+                    <div id="mCSB_3_container" class="mCSB_container" style="position: relative; top: 0px; left: 0px;"
+                         dir="ltr">
+                        <form action="." method="post">
+                            {% csrf_token %}
+                            <div class="niko-sc niko-sc--counter">
+                                <div class="niko-sc__title-wrap">
+                                    <h3 class="niko-sc__title">principal facts</h3>
+                                </div>
+
+                                <div class="niko-sc__counter-list">
+                                    <div class="niko-sc__counter-item">
+                                        <span class="niko-sc__counter-number">{{ f_form.count_1 }}</span>
+                                        <span class="niko-sc__counter-name">{{ f_form.fact_1 }}</span>
+                                    </div>
+                                    <div class="niko-sc__counter-item">
+                                        <span class="niko-sc__counter-number">{{ f_form.count_2 }}</span>
+                                        <span class="niko-sc__counter-name">{{ f_form.fact_2 }}</span>
+                                    </div>
+                                    <div class="niko-sc__counter-item">
+                                        <span class="niko-sc__counter-number">{{ f_form.count_3 }}</span>
+                                        <span class="niko-sc__counter-name">{{ f_form.fact_3 }}</span>
+                                    </div>
+                                    <div class="niko-sc__counter-item">
+                                        <span class="niko-sc__counter-number">{{ f_form.count_4 }}</span>
+                                        <span class="niko-sc__counter-name">{{ f_form.fact_4 }}</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <input class="mb-5 btn btn-success" type="submit" value='Save'>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

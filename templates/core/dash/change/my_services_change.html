@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block core %}
+    <div class="col-lg-6 p-0 site-content__inner-right">
+        <div class="site-content__page">
+            <div class="site-content__page-wrap mCustomScrollbar _mCS_3">
+                <div id="mCSB_3" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" tabindex="0"
+                     style="max-height: none;">
+                    <div id="mCSB_3_container" class="mCSB_container" style="position: relative; top: 0px; left: 0px;"
+                         dir="ltr">
+                        <form action="." method="post">
+                            {% csrf_token %}
+                            <div class="niko-sc niko-sc--services">
+                                <div class="niko-sc__title-wrap">
+                                    <h3 class="niko-sc__title">my services</h3>
+                                </div>
+
+                                <div class="niko-sc__services-list">
+
+                                    <div class="niko-sc__services-item">
+                                        <i class="niko-sc__services-icon icon-screen-desktop"></i>
+                                        <h5 class="niko-sc__services-name">{{ s_form.title_1 }}</h5>
+                                        <div class="niko-sc__services_description">
+                                            {{ s_form.body_1 }}
+                                        </div>
+                                    </div>
+                                    <div class="niko-sc__services-item">
+                                        <i class="niko-sc__services-icon icon-rocket"></i>
+                                        <h5 class="niko-sc__services-name">{{ s_form.title_2 }}</h5>
+                                        <div class="niko-sc__services_description">
+                                            {{ s_form.body_2 }}
+                                        </div>
+                                    </div>
+                                    <div class="niko-sc__services-item">
+                                        <i class="niko-sc__services-icon icon-layers"></i>
+                                        <h5 class="niko-sc__services-name">{{ s_form.title_3 }}</h5>
+                                        <div class="niko-sc__services_description">
+                                            {{ s_form.body_3 }}
+                                        </div>
+                                    </div>
+                                    <div class="niko-sc__services-item">
+                                        <i class="niko-sc__services-icon icon-shield"></i>
+                                        <h5 class="niko-sc__services-name">{{ s_form.title_4 }}</h5>
+                                        <div class="niko-sc__services_description">
+                                            {{ s_form.body_4 }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <input class="mb-5 btn btn-success" type="submit" value='Save'>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}

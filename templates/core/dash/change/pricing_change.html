@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+{% block core %}
+    <div class="col-lg-6 p-0 site-content__inner-right">
+        <div class="site-content__page">
+            <div class="site-content__page-wrap mCustomScrollbar _mCS_3">
+                <div id="mCSB_3" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" tabindex="0"
+                     style="max-height: none;">
+                    <div id="mCSB_3_container" class="mCSB_container" style="position: relative; top: 0px; left: 0px;"
+                         dir="ltr">
+                        <form action="." method="post">
+                            {% csrf_token %}
+                            <div class="niko-sc niko-sc--pricing">
+                                <div class="niko-sc__title-wrap">
+                                    <h3 class="niko-sc__title">my pricing</h3>
+                                </div>
+
+                                <div class="niko-sc__pricing-list">
+                                    <div class="niko-sc__pricing-item">
+                                        <h5 class="niko-sc__pricing-name">{{ p_form.title_l }}</h5>
+                                        <div class="niko-sc__pricing-price">
+                                    <span class="niko-sc__pricing-price-wrap">
+                                        <span class="niko-sc__pricing-currency">$</span>
+                                        <span class="niko-sc__pricing-cost">{{ p_form.price_l }}</span>
+                                    </span>
+                                        </div>
+                                        <ul class="niko-sc__pricing-description-list">
+                                            <li class="active">
+                                                {{ p_form.option_l_1 }}
+                                            </li>
+                                            <li class="active">
+                                                {{ p_form.option_l_2 }}
+                                            </li>
+                                            <li class="active">
+                                                {{ p_form.option_l_3 }}
+                                            </li>
+                                            <li class="active">
+                                                {{ p_form.option_l_4 }}
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="niko-sc__pricing-item">
+                                        <h5 class="niko-sc__pricing-name">{{ p_form.title_c }}</h5>
+                                        <div class="niko-sc__pricing-price">
+                                    <span class="niko-sc__pricing-price-wrap">
+                                        <span class="niko-sc__pricing-currency">$</span>
+                                        <span class="niko-sc__pricing-cost">{{ p_form.price_c }}</span>
+                                    </span>
+                                        </div>
+                                        <ul class="niko-sc__pricing-description-list">
+                                            <li class="active">
+                                                {{ p_form.option_c_1 }}
+                                            </li>
+                                            <li class="active">
+                                                {{ p_form.option_c_2 }}
+                                            </li>
+                                            <li class="active">
+                                                {{ p_form.option_c_3 }}
+                                            </li>
+                                            <li class="active">
+                                                {{ p_form.option_c_4 }}
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="niko-sc__pricing-item">
+                                        <h5 class="niko-sc__pricing-name">{{ p_form.title_r }}</h5>
+                                        <div class="niko-sc__pricing-price">
+                                    <span class="niko-sc__pricing-price-wrap">
+                                        <span class="niko-sc__pricing-currency">$</span>
+                                        <span class="niko-sc__pricing-cost">{{ p_form.price_r }}</span>
+                                    </span>
+                                        </div>
+                                        <ul class="niko-sc__pricing-description-list">
+                                            <li class="active">
+                                                {{ p_form.option_r_1 }}
+                                            </li>
+                                            <li class="active">
+                                                {{ p_form.option_r_2 }}
+                                            </li>
+                                            <li class="active">
+                                                {{ p_form.option_r_3 }}
+                                            </li>
+                                            <li class="active">
+                                                {{ p_form.option_r_4 }}
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <input class="mb-5 btn btn-success" type="submit" value="Save">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

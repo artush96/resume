@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block core %}
+    <div class="col-lg-6 p-0 site-content__inner-right">
+        <div class="site-content__page">
+            <div class="site-content__page-wrap mCustomScrollbar _mCS_3">
+                <div id="mCSB_3" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" tabindex="0"
+                     style="max-height: none;">
+                    <div id="mCSB_3_container" class="mCSB_container  mt-5" style="position:relative; top:0; left:0;">
+                        <div class="niko-sc niko-sc--contacts mt-1">
+                            {% if contacts %}
+                                {% if not request.user.is_superuser and contacts.user == request.user or request.user.is_superuser %}
+                                    <a class="btn btn-danger ml-4" href="#" data-toggle="modal"
+                                       data-target="#exampleModal-contact-{{ contacts.id }}">Delete</a>
+                                    <a class="btn btn-dark float-right ml-1"
+                                       href="{% url 'core:contact_edit' contacts.id %}">Edit</a>
+                                {% endif %}
+                                <a class="btn btn-info float-right"
+                                   href="{% url 'core:contact_create' %}">Create</a>
+                                <div class="niko-sc__contacts-description">
+                                    {{ contacts.introduction }}
+                                </div>
+                                <div class="modal fade" id="exampleModal-contact-{{ contacts.id }}" tabindex="-1"
+                                     role="dialog"
+                                     style="position: absolute; z-index: 100"
+                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h6 id="exampleModalLabel">Are you sure you want to
+                                                    delete?</h6>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <a href="{% url 'core:contact_delete' contacts.id %}">
+                                                    <button type="button" class="btn btn-primary">Delete
+                                                    </button>
+                                                </a>
+                                                <button type="button" class="btn btn-secondary"
+                                                        data-dismiss="modal">
+                                                    Close
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+
+                            <div class="acf-map"  style="position: relative; overflow: hidden; height: 280px">
+                                <iframe src="https://yandex.ru/map-widget/v1/-/CBFVREa7sD" class="map"
+                                frameborder="0" allowfullscreen="true"></iframe>
+                            </div>
+                            <div class="niko-sc__contacts-list">
+                                {% if contacts %}
+                                    <div class="niko-sc__contacts-item">
+                                        <div class="niko-sc__contacts-text-wrap">
+                                            <i class="niko-sc__contacts-icon icon-location-pin"></i>
+                                            <span class="niko-sc__contacts-text">{{ contacts.location }}</span>
+                                        </div>
+                                        <div class="niko-sc__contacts-mail-wrap">
+                                            <i class="niko-sc__contacts-icon icon-envelope"></i>
+                                            <a href="mailto:{{ contacts.mail }}" class="niko-sc__contacts-mail" rel="noreferrer">{{ contacts.mail }}</a>
+                                        </div>
+                                    </div>
+                                    <div class="niko-sc__contacts-item">
+                                        <div class="niko-sc__contacts-text-wrap">
+                                            <i class="niko-sc__contacts-icon icon-phone"></i>
+                                            <a href="tel:{{ contacts.phone }}" class="niko-sc__contacts-text" rel="noreferrer">{{ contacts.phone }}</a>
+                                        </div>
+                                        <div class="niko-sc__contacts-mail-wrap">
+                                            <i class="niko-sc__contacts-icon"><img style="width: 20px" src="{% static 'img/telegram_logo.png' %}" alt=""></i>
+                                            <a href="{{ contacts.telegram }}" class="niko-sc__contacts-mail" rel="noreferrer">{{ contacts.telegram_name }}</a>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="niko-sc niko-sc--contact-form">
+                            <div class="niko-sc__title-wrap">
+                                <h3 class="niko-sc__title">send message</h3>
+                            </div>
+                            <div class="niko-sc__contact-form">
+                                <div role="form" class="wpcf7" id="wpcf7-f264-o1" lang="en-US" dir="ltr">
+                                    <div class="screen-reader-response"></div>
+                                    <form action="." method="post"
+                                          class="wpcf7-form" novalidate="novalidate">
+                                        <div style="display: none;">
+                                            <input type="hidden" name="_wpcf7" value="264">
+                                            <input type="hidden" name="_wpcf7_version" value="5.1.5">
+                                            <input type="hidden" name="_wpcf7_locale" value="en_US">
+                                            <input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f264-o1">
+                                            <input type="hidden" name="_wpcf7_container_post" value="0">
+                                        </div>
+                                        <p><span class="wpcf7-form-control-wrap first-name"><input type="text"
+                                                                                                   name="first-name"
+                                                                                                   value="" size="40"
+                                                                                                   class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required"
+                                                                                                   aria-required="true"
+                                                                                                   aria-invalid="false"
+                                                                                                   placeholder="first name"></span><br>
+                                            <span class="wpcf7-form-control-wrap second-name"><input type="text"
+                                                                                                     name="second-name"
+                                                                                                     value="" size="40"
+                                                                                                     class="wpcf7-form-control wpcf7-text"
+                                                                                                     aria-invalid="false"
+                                                                                                     placeholder="second name"></span><br>
+                                            <span class="wpcf7-form-control-wrap your-email"><input type="email"
+                                                                                                    name="your-email"
+                                                                                                    value="" size="40"
+                                                                                                    class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email"
+                                                                                                    aria-required="true"
+                                                                                                    aria-invalid="false"
+                                                                                                    placeholder="email"></span><br>
+                                            <span class="wpcf7-form-control-wrap message"><textarea name="message"
+                                                                                                    cols="40" rows="10"
+                                                                                                    class="wpcf7-form-control wpcf7-textarea"
+                                                                                                    aria-invalid="false"
+                                                                                                    placeholder="message"></textarea></span><br>
+                                            <input type="submit" value="Send Message"
+                                                   class="wpcf7-form-control wpcf7-submit"></p>
+                                        <div class="wpcf7-response-output wpcf7-display-none"></div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
